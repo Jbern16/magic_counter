@@ -1,0 +1,84 @@
+Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values) return _elm.Main.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $StartApp$Simple = Elm.StartApp.Simple.make(_elm);
+   var _op = {};
+   var update = F2(function (action,model) {
+      var _p0 = action;
+      switch (_p0.ctor)
+      {case "NoOp": return model;
+         case "Increment1": return _U.update(model,{player1: model.player1 + 1});
+         case "Increment2": return _U.update(model,{player2: model.player2 + 1});
+         case "Decrement1": return _U.update(model,{player1: model.player1 - 1});
+         case "Decrement2": return _U.update(model,{player2: model.player2 - 1});
+         default: return _U.update(model,{player1: 20,player2: 20});}
+   });
+   var Reset = {ctor: "Reset"};
+   var Decrement2 = {ctor: "Decrement2"};
+   var Decrement1 = {ctor: "Decrement1"};
+   var Increment2 = {ctor: "Increment2"};
+   var Increment1 = {ctor: "Increment1"};
+   var view = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("container")]),
+      _U.list([A2($Html.div,
+              _U.list([$Html$Attributes.$class("row")]),
+              _U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Player 1 Health")]))
+                      ,A2($Html.div,
+                      _U.list([$Html$Attributes.$class("col-xs-8 col-offset-xs-2")]),
+                      _U.list([A2($Html.button,
+                              _U.list([$Html$Attributes.$class("btn btn-primary"),A2($Html$Events.onClick,address,Increment1)]),
+                              _U.list([$Html.text("+")]))
+                              ,A2($Html.div,_U.list([]),_U.list([$Html.text($Basics.toString(model.player1))]))
+                              ,A2($Html.button,
+                              _U.list([$Html$Attributes.$class("btn btn-primary"),A2($Html$Events.onClick,address,Decrement1)]),
+                              _U.list([$Html.text("-")]))]))]))
+              ,A2($Html.div,
+              _U.list([$Html$Attributes.$class("row")]),
+              _U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Player 1 Health")]))
+                      ,A2($Html.div,
+                      _U.list([$Html$Attributes.$class("col-xs-10 col-offset-xs-1")]),
+                      _U.list([A2($Html.button,
+                              _U.list([$Html$Attributes.$class("btn btn-primary"),A2($Html$Events.onClick,address,Increment2)]),
+                              _U.list([$Html.text("+")]))
+                              ,A2($Html.div,_U.list([]),_U.list([$Html.text($Basics.toString(model.player2))]))
+                              ,A2($Html.button,
+                              _U.list([$Html$Attributes.$class("btn btn-primary"),A2($Html$Events.onClick,address,Decrement2)]),
+                              _U.list([$Html.text("-")]))]))]))
+              ,A2($Html.div,
+              _U.list([$Html$Attributes.$class("row")]),
+              _U.list([A2($Html.div,
+              _U.list([$Html$Attributes.$class("col-xs-10 col-offset-xs-1")]),
+              _U.list([A2($Html.button,
+              _U.list([$Html$Attributes.$class("btn btn-primary"),A2($Html$Events.onClick,address,Reset)]),
+              _U.list([$Html.text("reset")]))]))]))]));
+   });
+   var NoOp = {ctor: "NoOp"};
+   var initialModel = {player1: 20,player2: 20};
+   var main = $StartApp$Simple.start({model: initialModel,view: view,update: update});
+   var Model = F2(function (a,b) {    return {player1: a,player2: b};});
+   return _elm.Main.values = {_op: _op
+                             ,Model: Model
+                             ,initialModel: initialModel
+                             ,NoOp: NoOp
+                             ,Increment1: Increment1
+                             ,Increment2: Increment2
+                             ,Decrement1: Decrement1
+                             ,Decrement2: Decrement2
+                             ,Reset: Reset
+                             ,update: update
+                             ,view: view
+                             ,main: main};
+};
