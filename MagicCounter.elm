@@ -1,7 +1,10 @@
+module MagicCounter where
+
+
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Signal exposing (Address)
+import Signal exposing(Address)
 import StartApp.Simple as StartApp
 
 -- MODEL
@@ -29,7 +32,7 @@ type Action
   | Decrement2
   | Reset
 
-
+update : Action -> Model -> Model
 update action model =
   case action of
     NoOp ->
@@ -48,35 +51,34 @@ update action model =
 
 -- VIEW
 
+view : Address Action -> Model -> Html
 view address model =
   div [ class "container" ] [
     div [ class "row" ] [
-    h3 [ ] [ text "Player 1 Health" ],
-      div [ class "col-xs-8 col-offset-xs-2" ]
+      div [ class "large-6 columns" ]
       [
-        button [ class "btn btn-primary", onClick address Increment1 ] [ text "+" ],
-        div [ ] [ text (toString model.player1) ],
-        button [ class "btn btn-primary", onClick address Decrement1 ] [ text "-" ]
+        h3 [ class "subheader" ] [ text "Player 1 Health" ],
+        button [ class "success hollow button", onClick address Increment1 ] [ text "+" ],
+        h2 [ ] [ text (toString model.player1) ],
+        button [ class "alert hollow button", onClick address Decrement1 ] [ text "-" ]
 
-      ]
-    ],
-    div [ class "row" ] [
-    h3 [ ] [ text "Player 1 Health" ],
-      div [ class "col-xs-10 col-offset-xs-1" ]
+      ],
+      div [ class "large-6 columns" ]
       [
-        button [ class "btn btn-primary", onClick address Increment2 ] [ text "+" ],
-        div [ ] [ text (toString model.player2) ],
-        button [ class "btn btn-primary", onClick address Decrement2 ] [ text "-" ]
-
+      h3 [ class "subheader" ] [ text "Player 2 Health" ],
+        button [ class "success hollow button", onClick address Increment2 ] [ text "+" ],
+        h2 [  ] [ text (toString model.player2) ],
+        button [ class "alert hollow button", onClick address Decrement2 ] [ text "-" ]
       ]
-    ],
+      ],
     div [ class "row" ] [
-      div [ class "col-xs-10 col-offset-xs-1" ]
+      div [ class "large-12 large-offset-3 columns" ]
       [
-        button [ class "btn btn-primary", onClick address Reset ] [ text "reset" ]
+        button [ class "warning hollow button", onClick address Reset ] [ text "reset" ]
       ] ] ]
 
 
+main: Signal Html
 main =
   StartApp.start
     {

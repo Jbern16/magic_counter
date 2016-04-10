@@ -10355,9 +10355,9 @@ Elm.MagicCounter.make = function (_elm) {
       return A2($Html.div,
       _U.list([$Html$Attributes.$class("container")]),
       _U.list([A2($Html.div,
-              _U.list([$Html$Attributes.$class("column row")]),
+              _U.list([$Html$Attributes.$class("row")]),
               _U.list([A2($Html.div,
-              _U.list([$Html$Attributes.$class("small-6 columns")]),
+              _U.list([$Html$Attributes.$class("large-6 columns")]),
               _U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Player 1 Health")]))
                       ,A2($Html.button,
                       _U.list([$Html$Attributes.$class("success hollow button"),A2($Html$Events.onClick,address,Increment1)]),
@@ -10367,9 +10367,7 @@ Elm.MagicCounter.make = function (_elm) {
                       _U.list([$Html$Attributes.$class("alert hollow button"),A2($Html$Events.onClick,address,Decrement1)]),
                       _U.list([$Html.text("-")]))]))]))
               ,A2($Html.div,
-              _U.list([$Html$Attributes.$class("column row")]),
-              _U.list([A2($Html.div,
-              _U.list([$Html$Attributes.$class("small-6 columns")]),
+              _U.list([$Html$Attributes.$class("large-6 columns")]),
               _U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Player 2 Health")]))
                       ,A2($Html.button,
                       _U.list([$Html$Attributes.$class("success hollow button"),A2($Html$Events.onClick,address,Increment2)]),
@@ -10377,7 +10375,7 @@ Elm.MagicCounter.make = function (_elm) {
                       ,A2($Html.div,_U.list([]),_U.list([$Html.text($Basics.toString(model.player2))]))
                       ,A2($Html.button,
                       _U.list([$Html$Attributes.$class("alert hollow button"),A2($Html$Events.onClick,address,Decrement2)]),
-                      _U.list([$Html.text("-")]))]))]))
+                      _U.list([$Html.text("-")]))]))
               ,A2($Html.div,
               _U.list([$Html$Attributes.$class("row")]),
               _U.list([A2($Html.div,

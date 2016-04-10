@@ -5,10 +5,10 @@ var gulp = require('gulp'),
 gulp.task('elm-init', elm.init);
 
 gulp.task('elm', ['elm-init'], function () {
-    return gulp.src('./TicTacToe.elm')
+    return gulp.src('./MagicCounter.elm')
         .pipe(elm())
         .on('error', swallowError)
-        .pipe(rename('TicTac.js'))
+        .pipe(rename('mc.js'))
         .pipe(gulp.dest('./'))
 });
 
