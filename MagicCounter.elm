@@ -13,13 +13,32 @@ type alias Model =
   {
     player1 : Int,
     player2 : Int
+    creatures : List
+    nextID : Int
+  }
+
+type alias Creature =
+  { name : String,
+    health : Int,
+    attacl : Int,
+    id: Int
   }
 
 initialModel : Model
 initialModel =
   {
     player1 =  20,
-    player2 =  20
+    player2 =  20,
+    creatures = []
+    nextID = 1
+  }
+
+newCreature name health attack id =
+  {
+    name = name
+    health = health
+    attack = attack
+    id = id
   }
 
 -- UPDATE
@@ -30,6 +49,7 @@ type Action
   | Increment2
   | Decrement1
   | Decrement2
+  | AddCreature
   | Reset
 
 update : Action -> Model -> Model
@@ -45,11 +65,25 @@ update action model =
       { model | player1 = model.player1 - 1 }
     Decrement2 ->
       { model | player2 = model.player2 - 1 }
+    AddCreature ->
+
     Reset ->
       { model | player1 = 20, player2 = 20 }
 
 
 -- VIEW
+
+creatureList address creature =
+    li [ classList [  ],
+         onClick address (Mark entry.id)
+        ]
+      [ span [ ] [ text creature.name ]
+      [ span [ class "Health" ] [ text creature.health ],
+        span [ class "Attack" ] [ text creature.attack ],
+        button
+          [ class "Delete", onClick address (Delete creature.id) ]
+          [ ]
+      ]
 
 view : Address Action -> Model -> Html
 view address model =
@@ -76,6 +110,12 @@ view address model =
       [
         button [ class "warning hollow button", onClick address Reset ] [ text "reset" ]
       ] ] ]
+    div [ class "row" ] [
+      div [ class "large-12 large-offset-3 columns" ]
+      [
+        button [ class "warning hollow button", onClick address AddCreature ] [ text "reset" ]
+      ] ] ]
+
 
 
 main: Signal Html
