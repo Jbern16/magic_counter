@@ -10347,44 +10347,49 @@ Elm.MagicCounter.make = function (_elm) {
          default: return _U.update(model,{player1: 20,player2: 20});}
    });
    var Reset = {ctor: "Reset"};
+   var reset = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("row")]),
+      _U.list([A2($Html.div,
+      _U.list([$Html$Attributes.$class("large-12 large-offset-3 columns")]),
+      _U.list([A2($Html.button,
+      _U.list([$Html$Attributes.$class("warning hollow button"),A2($Html$Events.onClick,address,Reset)]),
+      _U.list([$Html.text("reset")]))]))]));
+   });
    var Decrement2 = {ctor: "Decrement2"};
    var Decrement1 = {ctor: "Decrement1"};
    var Increment2 = {ctor: "Increment2"};
+   var player2Health = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("large-6 columns")]),
+      _U.list([A2($Html.h3,_U.list([$Html$Attributes.$class("subheader")]),_U.list([$Html.text("Player 2 Health")]))
+              ,A2($Html.button,
+              _U.list([$Html$Attributes.$class("success hollow button"),A2($Html$Events.onClick,address,Increment2)]),
+              _U.list([$Html.text("+")]))
+              ,A2($Html.h2,_U.list([]),_U.list([$Html.text($Basics.toString(model.player2))]))
+              ,A2($Html.button,
+              _U.list([$Html$Attributes.$class("alert hollow button"),A2($Html$Events.onClick,address,Decrement2)]),
+              _U.list([$Html.text("-")]))]));
+   });
    var Increment1 = {ctor: "Increment1"};
+   var player1Health = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("row")]),
+      _U.list([A2($Html.div,
+      _U.list([$Html$Attributes.$class("large-6 columns")]),
+      _U.list([A2($Html.h3,_U.list([$Html$Attributes.$class("subheader")]),_U.list([$Html.text("Player 1 Health")]))
+              ,A2($Html.button,
+              _U.list([$Html$Attributes.$class("success hollow button"),A2($Html$Events.onClick,address,Increment1)]),
+              _U.list([$Html.text("+")]))
+              ,A2($Html.h2,_U.list([]),_U.list([$Html.text($Basics.toString(model.player1))]))
+              ,A2($Html.button,
+              _U.list([$Html$Attributes.$class("alert hollow button"),A2($Html$Events.onClick,address,Decrement1)]),
+              _U.list([$Html.text("-")]))]))]));
+   });
    var view = F2(function (address,model) {
       return A2($Html.div,
       _U.list([$Html$Attributes.$class("container")]),
-      _U.list([A2($Html.div,
-              _U.list([$Html$Attributes.$class("column row")]),
-              _U.list([A2($Html.div,
-              _U.list([$Html$Attributes.$class("small-6 columns")]),
-              _U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Player 1 Health")]))
-                      ,A2($Html.button,
-                      _U.list([$Html$Attributes.$class("success hollow button"),A2($Html$Events.onClick,address,Increment1)]),
-                      _U.list([$Html.text("+")]))
-                      ,A2($Html.div,_U.list([]),_U.list([$Html.text($Basics.toString(model.player1))]))
-                      ,A2($Html.button,
-                      _U.list([$Html$Attributes.$class("alert hollow button"),A2($Html$Events.onClick,address,Decrement1)]),
-                      _U.list([$Html.text("-")]))]))]))
-              ,A2($Html.div,
-              _U.list([$Html$Attributes.$class("column row")]),
-              _U.list([A2($Html.div,
-              _U.list([$Html$Attributes.$class("small-6 columns")]),
-              _U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Player 2 Health")]))
-                      ,A2($Html.button,
-                      _U.list([$Html$Attributes.$class("success hollow button"),A2($Html$Events.onClick,address,Increment2)]),
-                      _U.list([$Html.text("+")]))
-                      ,A2($Html.div,_U.list([]),_U.list([$Html.text($Basics.toString(model.player2))]))
-                      ,A2($Html.button,
-                      _U.list([$Html$Attributes.$class("alert hollow button"),A2($Html$Events.onClick,address,Decrement2)]),
-                      _U.list([$Html.text("-")]))]))]))
-              ,A2($Html.div,
-              _U.list([$Html$Attributes.$class("row")]),
-              _U.list([A2($Html.div,
-              _U.list([$Html$Attributes.$class("large-12 large-offset-6 columns")]),
-              _U.list([A2($Html.button,
-              _U.list([$Html$Attributes.$class("warning hollow button"),A2($Html$Events.onClick,address,Reset)]),
-              _U.list([$Html.text("reset")]))]))]))]));
+      _U.list([A2(player1Health,address,model),A2(player2Health,address,model),A2(reset,address,model)]));
    });
    var NoOp = {ctor: "NoOp"};
    var initialModel = {player1: 20,player2: 20};
@@ -10400,6 +10405,9 @@ Elm.MagicCounter.make = function (_elm) {
                                      ,Decrement2: Decrement2
                                      ,Reset: Reset
                                      ,update: update
+                                     ,player1Health: player1Health
+                                     ,player2Health: player2Health
+                                     ,reset: reset
                                      ,view: view
                                      ,main: main};
 };

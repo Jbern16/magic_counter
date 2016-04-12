@@ -51,9 +51,8 @@ update action model =
 
 -- VIEW
 
-view : Address Action -> Model -> Html
-view address model =
-  div [ class "container" ] [
+
+player1Health address model =
     div [ class "row" ] [
       div [ class "large-6 columns" ]
       [
@@ -61,22 +60,31 @@ view address model =
         button [ class "success hollow button", onClick address Increment1 ] [ text "+" ],
         h2 [ ] [ text (toString model.player1) ],
         button [ class "alert hollow button", onClick address Decrement1 ] [ text "-" ]
+      ] ]
 
-      ],
-      div [ class "large-6 columns" ]
-      [
-      h3 [ class "subheader" ] [ text "Player 2 Health" ],
-        button [ class "success hollow button", onClick address Increment2 ] [ text "+" ],
-        h2 [  ] [ text (toString model.player2) ],
-        button [ class "alert hollow button", onClick address Decrement2 ] [ text "-" ]
-      ]
-      ],
+player2Health address model =
+    div [ class "large-6 columns" ]
+    [
+    h3 [ class "subheader" ] [ text "Player 2 Health" ],
+      button [ class "success hollow button", onClick address Increment2 ] [ text "+" ],
+      h2 [  ] [ text (toString model.player2) ],
+      button [ class "alert hollow button", onClick address Decrement2 ] [ text "-" ]
+    ]
+
+reset address model =
     div [ class "row" ] [
       div [ class "large-12 large-offset-3 columns" ]
       [
         button [ class "warning hollow button", onClick address Reset ] [ text "reset" ]
-      ] ] ]
+      ] ]
 
+view : Address Action -> Model -> Html
+view address model =
+    div [ class "container" ] [
+        player1Health address model,
+        player2Health address model,
+        reset address model
+       ]
 
 main: Signal Html
 main =
